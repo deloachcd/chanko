@@ -1,0 +1,11 @@
+.is-rounded-cornered {
+    border-radius: 5px;
+}
+
+.is-bold {
+    font-weight: bold;
+}
+
+.is-fitted {
+    object-fit: cover;
+}
