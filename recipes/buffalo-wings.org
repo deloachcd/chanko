@@ -1,0 +1,35 @@
+[[./path/to/image.png]]
+#+tags: american,comfort_food
+#+prep_time: 30 minutes
+#+cook_time: 35 minutes
+
+* RedHot Buffalo Wings
+** Description / Notes
+This recipe really whips the llama's ass.
+
+** Ingredients
+- cooking oil
+- chicken wing segments
+- Frank's RedHot "Hot Buffalo" or other wing sauce
+*** Dry seasoning
+- cornstarch
+- cayenne pepper
+- Colonel Lee's (or other cajun seasoning salt)
+- black pepper
+- paprika
+
+** Directions
+1. Cut the wings into flats and drummies (if they don't already come that way)
+2. Mix the ingredients for the dry seasoning together in a bowl, and
+   toss the wings in, coating them with the mix. Put the coated wings
+   in the fridge for at least 30 minutes, but ideally for at least 4
+   hours or overnight.
+3. To cook the wings, start by preheating the oven to 425 degrees Farenheit
+4. Take the wings out of the fridge, and coating with cooking
+   oil. Line the pan you intend to use with cooking oil, as well.
+5. Place the coated wings in the pan, and bake for 20 minutes
+6. Remove the wings from the oven and flip each one over, so that it
+   gets crispy on both sides. Bake for another 15 minutes.
+7. Once the wings are fully crispy, remove from the oven and toss in a
+   bowl, coating with buffalo wing sauce of your choosing, and then serve.
+   
