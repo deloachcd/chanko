@@ -7,10 +7,25 @@
     <link rel="stylesheet" href="css/bulma.min.css">
     <link rel="stylesheet" href="css/custom.css">
   </head>
-  <body>
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-transparent is-fixed-top has-border-shadow">
+      <div class="navbar-item">
+        <div class="field has-addons">
+          <div class="control">
+            <input class="input" type="text" placeholder="Find a recipe...">
+          </div>
+          <div class="control">
+            <a class="button is-dark">
+              <b>Random Recipe</b>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
     <section class="section">
       <div class="container">
         <div class="columns">
+          <!-- LAYOUT: 4x3 -->
           <div class="column is-one-third">
             <div class="box">
               <figure class="image is-16by9">
