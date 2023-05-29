@@ -29,7 +29,13 @@ import orgparse
 #   NOTE process as paragraph
 #   else:
 #     steps = level2.get_body.replace("\n", "")
+#   TODO parse level3 children
+#   while level.children != []:
+#     recurse(level)
+# TODO turn this into a function which builds a JSON object as intermediary
+# TODO generate the webpage from the JSON object with BeautifulSoup
 
 def normalize_orgl(org_list):
+    # TODO replace with a "parse list" function that takes item matching regex as an arg
     "Remove excessive white space from raw org lists"
     return [re.sub("\s+", " ", i) for i in org_list if i != ""]
