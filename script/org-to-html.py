@@ -4,18 +4,12 @@ import re
 import bs4
 import orgparse
 
-def normalize_orgl(org_list):
-    # TODO replace with a "parse list" function that takes item matching regex as an arg
-    "Remove excessive white space from raw org lists"
-    return [re.sub("\s+", " ", i) for i in org_list if i != ""]
-
 def parse_orgnode(node):
     "Take an OrgNode object from orgparse and recursively parse it, returning a JSON object"
     def parse_as_list(body, entry_regex):
         list_raw = re.split(entry_regex, body)[1:]
         return [re.sub("\s+", " ", i) for i in list_raw if i != ""]
 
-    n_header = node.get_heading()
     n_body = node.get_body()
     if re.search("^\-\s", n_body):
         body_parsed = parse_as_list(n_body, "\-\s")
@@ -31,7 +25,7 @@ def parse_orgnode(node):
                 if node.children != []
                 else None)
     r_dict = {
-        "Header": n_header,
+        "Header": node.get_heading(),
         "Body": body_parsed,
         "Format": body_format
     }
