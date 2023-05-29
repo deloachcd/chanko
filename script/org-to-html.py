@@ -34,6 +34,7 @@ def parse_orgnode(node):
 
     return r_dict
 
+properties = {}
 for orgfile in Path("recipes/").glob("*.org"):
     root = orgparse.load(orgfile)
     img_path = re.search("\[\[.*\]\]", root.get_body(format="raw")).group()[2:-2]
@@ -46,6 +47,11 @@ for orgfile in Path("recipes/").glob("*.org"):
     }
     for level2 in level1.children:
         page["Content"].append(parse_orgnode(level2))
-    print(page)
+    properties[page["RecipeName"]] = ({
+            "ImagePath": page["ImagePath"],
+            "FilePath": str(orgfile).replace(".org", ".html")
+         } | page["Properties"]
+    )
 
+# TODO parse tags
 # TODO generate the webpage from the JSON object with BeautifulSoup
