@@ -18,7 +18,7 @@ def parse_orgnode(node):
         body_parsed = parse_as_list(n_body, "\d*\.\s")
         body_format = "OrderedList"
     else:
-        body_parsed = n_body.replace("\n", "")
+        body_parsed = n_body.replace("\n", " ")
         body_format = "Paragraph"
 
     children = ([parse_orgnode(child) for child in node.children]
