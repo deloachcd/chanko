@@ -1,7 +1,7 @@
 import bs4
 import orgparse
 
-# NOTE loop through relevant tags
+# DEPRECATED loop through relevant tags
 #for tag in filter(lambda x: type(x) is bs4.element.Tag, soup.children)
 # 1. expect image -> drill down into tags to get image
 # 2. expect h1 and then non-heading tags -> RecipeNameSection 
@@ -9,8 +9,7 @@ import orgparse
 
 # NOTE implement org parser
 # root = orgparse.load("recipes/recipe.org")
-# level0_rawbody = root.get_body(format="raw")
-# img_path = re.search("\[\[.*\]\]", level0_rawbody).group()[2:-2]
+# img_path = re.search("\[\[.*\]\]", root.get_body(format="raw")).group()[2:-2]
 # level1 = root.children[0]
 # recipe_name = level1.get_heading()
 # level1.properties ->
@@ -22,8 +21,15 @@ import orgparse
 #   NOTE process as unordered list
 #   if re.search("^\-\s", level2.get_body()):
 #     steps_raw = re.split("\-\s", level2.get_body())[1:]
+#     steps = normalize_orgl(steps_raw)
+#   NOTE process as ordered list
 #   elif re.search("^\d*\.\s", level2.get_body()):
 #     steps_raw = re.split("\d*\.\s", level2.get_body())[1:]
+#     steps = normalize_orgl(steps_raw)
 #   NOTE process as paragraph
 #   else:
-#     steps_raw = level2.get_body.replace("\n", "")
+#     steps = level2.get_body.replace("\n", "")
+
+def normalize_orgl(org_list):
+    "Remove excessive white space from raw org lists"
+    return [re.sub("\s+", " ", i) for i in org_list if i != ""]

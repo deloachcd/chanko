@@ -1,11 +1,20 @@
-[[./path/to/image.png]]
-#+tags: american,comfort_food
-#+prep_time: 30 minutes
-#+cook_time: 35 minutes
+#+ATTR_ORG: :width 300
+[[../site/img/buffalo-wings.jpg]]
 
 * RedHot Buffalo Wings
-** Description / Notes
-This recipe really whips the llama's ass.
+:PROPERTIES:
+:PrepTime: 30 minutes
+:CookTime: 35 minutes
+:Tags: american,comfort_food
+:END:
+
+** Notes
+This method really whips the llama's ass - it's the
+crispiest I've been able to get chicken wings in the
+oven. I do these by just putting the wings in a cast
+iron pan and putting that in to bake, but you can
+probably use a baking sheet with aluminum and get
+similar results (maybe not quite as crispy).
 
 ** Ingredients
 - cooking oil
@@ -32,4 +41,3 @@ This recipe really whips the llama's ass.
    gets crispy on both sides. Bake for another 15 minutes.
 7. Once the wings are fully crispy, remove from the oven and toss in a
    bowl, coating with buffalo wing sauce of your choosing, and then serve.
-   
