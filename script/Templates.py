@@ -2,6 +2,7 @@ import bs4
 
 from dataclasses import dataclass
 from pathlib import Path
+import html
 
 
 class FileTemplateHTML:
@@ -42,6 +43,49 @@ class RecipeBoxSmall(FileTemplateHTML):
     cook_time: str
     tags: RecipeBoxTags
     html_template: str = Path("templates/RecipeBox.html").read_text()
+
+
+@dataclass
+class RecipeDetailSection(FileTemplateHTML):
+    content: dict
+    html_template: str = Path("templates/RecipeDetailSection.html").read_text()
+
+    def render(self):
+        def build_section(entry, depth):
+            header = (
+                f'<h{depth} class="title is-{depth*2}">{entry["Header"]}</h{depth}>'
+            )
+            if entry["Format"] == "Paragraph":
+                body = f'<p>{entry["Body"]}</p>'
+            elif entry["Format"] == "OrderedList":
+                body = (
+                    "<ol>"
+                    + "".join([f"<li>{html.escape(li)}</li>" for li in entry["Body"]])
+                    + "</ol>"
+                )
+            elif entry["Format"] == "UnorderedList":
+                body = (
+                    "<ul>"
+                    + "".join([f"<li>{html.escape(li)}</li>" for li in entry["Body"]])
+                    + "</ul>"
+                )
+
+            rval = f"{header}\n{body}\n"
+            if "children" in entry.keys():
+                for child in entry["children"]:
+                    rval += build_section(child, depth + 1)
+
+            return rval
+
+        self._body = build_section(self.content, 2)
+        return super().render()
+
+
+@dataclass
+class RecipeInstructionsPage(FileTemplateHTML):
+    recipe_box: RecipeBox
+    detail_sections: RecipeDetailSections
+    html_template: str = Path("templates/RecipeInstructionsPage.html").read_text()
 
 
 if __name__ == "__main__":
