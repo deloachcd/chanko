@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{self.recipe_box.recipe_name}</title>
+    <link rel="icon" type="image/x-icon" href="../res/icons/kitchen-set-solid.svg">
+    <link rel="stylesheet" href="../res/css/bulma.min.css">
+    <link rel="stylesheet" href="../res/css/custom.css">
+  </head>
+  <body class="has-navbar-fixed-bottom">
+    <nav class="navbar is-transparent is-fixed-bottom has-border-shadow">
+      <div class="navbar-item">
+        <a class="button is-dark" href="/">
+          <b>Return to Recipes List</b>
+        </a>
+      </div>
+    </nav>
+    <section class="section">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-two-thirds">
+            <section class="section">
+              {self.recipe_box.render()}
+            </section>
+            {self.detail_sections.render()}
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
