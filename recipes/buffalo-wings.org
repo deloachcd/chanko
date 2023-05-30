@@ -1,5 +1,5 @@
 #+ATTR_ORG: :width 300
-[[./img/buffalo-wings.jpg]]
+[[../res/img/buffalo-wings.jpg]]
 
 * RedHot Buffalo Wings
 :PROPERTIES:
