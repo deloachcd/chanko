@@ -1,0 +1,13 @@
+# Simple Kubernetes Pod to deploy the app 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: chanko-pod
+  labels:
+    app: chanko-web
+spec:
+  containers:
+    - name: chanko-ctr
+      image: ghcr.io/deloachcd/deloachcd:latest
+      ports:
+        - containerPort: 8000
