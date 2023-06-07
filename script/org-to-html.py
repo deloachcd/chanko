@@ -59,7 +59,7 @@ for orgfile in Path("recipes/").glob("*.org"):
     # NOTE will dump this to a file later when generating the index dynamically
     properties[page["RecipeName"]] = {
         "ImagePath": page["ImagePath"],
-        "FilePath": str(orgfile).replace(".org", ".html"),
+        "FileName": str(orgfile).replace(".org", ".html"),
     } | page["Properties"]
 
     detail_sections = [RecipeDetailSection(section) for section in page["Content"]]
@@ -76,11 +76,7 @@ for orgfile in Path("recipes/").glob("*.org"):
         [RecipeDetailSection(section) for section in page["Content"]],
     )
     soup = bs4.BeautifulSoup(page_html.render(), "html.parser")
-    htmlfile = properties[page["RecipeName"]]["FilePath"]
-    with open(htmlfile, "w") as outfile:
+    html_fname = properties[page["RecipeName"]]["FileName"]
+    with open(f"site/{html_fname}", "w") as outfile:
         outfile.write(soup.prettify())
-        print(f"Successfully converted {orgfile} to {htmlfile}")
-
-
-# TODO parse tags
-# TODO generate the webpage from the JSON object with BeautifulSoup
+        print(f"Successfully converted {orgfile} to {html_fname}")
