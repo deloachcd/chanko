@@ -84,7 +84,7 @@ class RecipeDetailSection(FileTemplateHTML):
 @dataclass
 class RecipeInstructionsPage(FileTemplateHTML):
     recipe_box: RecipeBox
-    detail_sections: RecipeDetailSections
+    detail_sections: list
     html_template: str = Path("templates/RecipeInstructionsPage.html").read_text()
 
 
