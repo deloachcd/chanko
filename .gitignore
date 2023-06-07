@@ -1,3 +1,6 @@
 venv/
 script/__pycache__
 .DS_Store
+
+site/recipes/*.html
+site/recipes/index.json
