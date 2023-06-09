@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let columnsDivs = [];
         // build 3-wide "columns" divs for matched recipes
-        n_matches = matchedRecipeBoxes.length;
+        const n_matches = matchedRecipeBoxes.length;
         for (let i = 0; i < n_matches; i += 3) {
             newColumnsDiv = document.createElement("div");
             newColumnsDiv.classList.add("columns");
