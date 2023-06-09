@@ -75,8 +75,15 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < n_matches; i += 3) {
             newColumnsDiv = document.createElement("div");
             newColumnsDiv.classList.add("columns");
-            for (let j = 0; i + j < n_matches && j < 3; j++) {
-                newColumnsDiv.appendChild(matchedRecipeBoxes[i+j]);
+            // this is a bit ugly, but it's more efficient than a
+            // nested 'for' loop with a more generallized solution
+            // because we know the width is just going to be 3 columns
+            newColumnsDiv.appendChild(matchedRecipeBoxes[i]);
+            if (i+1 < n_matches) {
+                newColumnsDiv.appendChild(matchedRecipeBoxes[i+1]);
+            }
+            if (i+2 < n_matches) {
+                newColumnsDiv.appendChild(matchedRecipeBoxes[i+2]);
             }
             columnsDivs.push(newColumnsDiv);
         }
