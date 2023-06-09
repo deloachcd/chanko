@@ -75,17 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < n_matches; i += 3) {
             newColumnsDiv = document.createElement("div");
             newColumnsDiv.classList.add("columns");
-            newColumnsDiv.appendChild(matchedRecipeBoxes[i]);
-            if (i+1 < n_matches) {
-                newColumnsDiv.appendChild(matchedRecipeBoxes[i+1]);
-            }
-            if (i+2 < n_matches) {
-                newColumnsDiv.appendChild(matchedRecipeBoxes[i+2]);
+            for (let j = 0; i + j < n_matches && j < 3; j++) {
+                newColumnsDiv.appendChild(matchedRecipeBoxes[i+j]);
             }
             columnsDivs.push(newColumnsDiv);
         }
-        // use a single div for unmatched recipes, since they won't be
-        // displayed anyway
+        // throw all unmatched recipes into a single, invisible div
         hiddenDiv = document.createElement("div");
         hiddenDiv.classList.add("hidden");
         unmatchedRecipeBoxes.forEach(box => {hiddenDiv.appendChild(box)})
