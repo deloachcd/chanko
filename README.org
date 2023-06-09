@@ -1,0 +1,18 @@
+* Simple Recipe Hosting with org-mode
+** What this does
+The basic usage is like this:
+- write recipes in org-mode markup
+- run some Python scripts to automatically generate a stylish static
+  webpage from them
+- host the resulting ~site/~ however you like
+  
+*** Basic dev workflow with Docker
+#+begin_src sh
+# generate static content
+python3 script/org-to-html.py
+python3 script/generate-index.py
+# test with local webserver
+cd deploy
+docker-compose up
+#+end_src
+
