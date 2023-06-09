@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // grab search input value
         const searchText = search.value.toLowerCase().trim().normalize('NFD');
         const searchTerms = searchText.split(" ");
-        const hasFilter = searchText.length > 0;
         let matchedRecipeBoxes = [];
         let unmatchedRecipeBoxes = [];
 
@@ -63,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const searchString = `${recipeBox.textContent} ${recipeBox.dataset.tags}`.toLowerCase().normalize('NFD');
             const isMatch = searchTerms.every(term => searchString.includes(term));
 
-            if (isMatch || !hasFilter) {
+            if (isMatch) {
                 matchedRecipeBoxes.push(recipeBox)
             } else {
                 unmatchedRecipeBoxes.push(recipeBox)
