@@ -47,9 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // we're clearly running javascript, so get rid of no-js-warning
     document.getElementById("no-js-warning").remove();
 
+    // top searchbar
+    const search = document.getElementById("search");
+
     search.addEventListener("input", () => {
         const recipeBoxes = document.querySelectorAll("div.recipebox");
-        const search = document.getElementById("search");
 
         // grab search input value
         const searchText = search.value.toLowerCase().trim().normalize('NFD');
@@ -102,5 +104,16 @@ document.addEventListener("DOMContentLoaded", () => {
             recipeSection.appendChild(columnDiv);
         }
         recipeSection.appendChild(hiddenDiv);
+    })
+
+    document.querySelectorAll("#tagsection > div.tags > button").forEach(tag => {
+        tag.addEventListener('click', () => {
+            if (search.value == "") {
+                search.value += tag.innerText + " ";
+            } else {
+                search.value += " " + tag.innerText;
+            }
+            search.dispatchEvent(new Event('input'));
+        })
     })
 })
