@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // top searchbar
     const search = document.getElementById("search");
+    const clearSearch = document.getElementById("clear-search")
 
     search.addEventListener("input", () => {
         const recipeBoxes = document.querySelectorAll("div.recipebox");
@@ -115,5 +116,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             search.dispatchEvent(new Event('input'));
         })
+    })
+
+    clearSearch.addEventListener("click", () => {
+        search.value = "";
+        search.dispatchEvent(new Event('input'));
     })
 })

@@ -17,3 +17,18 @@
 .hidden {
     display: none;
 }
+
+button#clear-search {
+    all: unset;
+    position: absolute;
+    right: 4px;
+    top: 7px;
+    height: 25px;
+    width: 25px;
+    color: #dfdfdf;
+    cursor: pointer;
+    transition: color 180ms ease-in-out;
+}
+button#clear-search:hover {
+    color: #000;
+}
