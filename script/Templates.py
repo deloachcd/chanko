@@ -88,6 +88,12 @@ class RecipeInstructionsPage(FileTemplateHTML):
     html_template: str = Path("templates/RecipeInstructionsPage.html").read_text()
 
 
+class TemplateHelpers:
+    @staticmethod
+    def render_all(collection):
+        return "".join([item.render() for item in collection])
+
+
 if __name__ == "__main__":
     # Use this block to run some basic sanity checks
     soup = bs4.BeautifulSoup(

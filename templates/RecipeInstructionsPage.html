@@ -23,7 +23,7 @@
             <section class="section">
               {self.recipe_box.render()}
             </section>
-            {"".join([section.render() for section in self.detail_sections])}
+            {TemplateHelpers.render_all(self.detail_sections)}
           </div>
         </div>
       </div>

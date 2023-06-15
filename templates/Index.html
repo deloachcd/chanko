@@ -35,12 +35,12 @@
       </div>
     </section>
     <section class="section" id="recipesection">
-      {"".join([div.render() for div in self.recipebox_column_divs])}
+      {TemplateHelpers.render_all(self.recipebox_column_divs)}
     </section>
     <section class="section pt-0" id="tagsection">
       <h1 class="title">Tags</h1>
       <div class="tags are-medium">
-        {"".join([span.render() for span in self.tag_button_spans])}
+        {TemplateHelpers.render_all(self.tag_button_spans)}
       </div>
     </section>
   </body>
