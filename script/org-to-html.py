@@ -43,8 +43,7 @@ def parse_orgnode(node):
     return r_dict
 
 
-# TODO make properties a list rather than a dict
-properties = {}
+index = {"Recipes": [], "Tags": []}
 for orgfile in Path("recipes/").glob("*.org"):
     root = orgparse.load(orgfile)
     img_path = re.search("\[\[.*\]\]", root.get_body(format="raw")).group()[2:-2]
@@ -53,18 +52,23 @@ for orgfile in Path("recipes/").glob("*.org"):
         "ImagePath": img_path,
         "RecipeName": level1.get_heading(),
         "Properties": level1.properties,
+        "FileName": str(orgfile).replace(".org", ".html"),
         "Content": [],
     }
+    taglist = []
+    # build a list of tags for rendering index page
+    for tag in page["Properties"]["Tags"].split(","):
+        if tag not in index["Tags"]:
+            index["Tags"].append(tag)
+        taglist.append(tag)
     # make tag properties into a list for easier parsing
-    page["Properties"]["Tags"] = [
-        tag.strip() for tag in page["Properties"]["Tags"].split(",")
-    ]
+    page["Properties"]["Tags"] = taglist
     for level2 in level1.children:
         page["Content"].append(parse_orgnode(level2))
-    properties[page["RecipeName"]] = {
-        "ImagePath": page["ImagePath"],
-        "FileName": str(orgfile).replace(".org", ".html"),
-    } | page["Properties"]
+    # add entry to list for index.json, ignoring page content
+    index["Recipes"].append(
+        {key: value for key, value in page.items() if key not in ["Content"]}
+    )
 
     detail_sections = [RecipeDetailSection(section) for section in page["Content"]]
     page_html = RecipeInstructionsPage(
@@ -78,10 +82,9 @@ for orgfile in Path("recipes/").glob("*.org"):
         [RecipeDetailSection(section) for section in page["Content"]],
     )
     soup = bs4.BeautifulSoup(page_html.render(), "html.parser")
-    html_fname = properties[page["RecipeName"]]["FileName"]
-    with open(f"site/{html_fname}", "w") as outfile:
+    with open(f"site/{page['FileName']}", "w") as outfile:
         outfile.write(soup.prettify())
-        print(f"Successfully converted {orgfile} to {html_fname}")
+        print(f"Successfully converted {orgfile} to {page['FileName']}")
 with open("site/recipes/index.json", "w") as outfile:
-    outfile.write(json.dumps(properties, indent=4))
+    outfile.write(json.dumps(index, indent=4))
     print(f"Successfully generated index.json from recipes")
