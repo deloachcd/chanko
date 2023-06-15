@@ -7,7 +7,7 @@ import orgparse
 
 from Templates import (
     RecipeBox,
-    RecipeBoxTags,
+    RecipeBoxTag,
     RecipeInstructionsPage,
     RecipeDetailSection,
 )
@@ -43,6 +43,7 @@ def parse_orgnode(node):
     return r_dict
 
 
+# TODO make properties a list rather than a dict
 properties = {}
 for orgfile in Path("recipes/").glob("*.org"):
     root = orgparse.load(orgfile)
@@ -54,9 +55,12 @@ for orgfile in Path("recipes/").glob("*.org"):
         "Properties": level1.properties,
         "Content": [],
     }
+    # make tag properties into a list for easier parsing
+    page["Properties"]["Tags"] = [
+        tag.strip() for tag in page["Properties"]["Tags"].split(",")
+    ]
     for level2 in level1.children:
         page["Content"].append(parse_orgnode(level2))
-    # NOTE will dump this to a file later when generating the index dynamically
     properties[page["RecipeName"]] = {
         "ImagePath": page["ImagePath"],
         "FileName": str(orgfile).replace(".org", ".html"),
@@ -69,9 +73,7 @@ for orgfile in Path("recipes/").glob("*.org"):
             recipe_name=page["RecipeName"],
             prep_time=page["Properties"]["PrepTime"],
             cook_time=page["Properties"]["CookTime"],
-            tags=RecipeBoxTags(
-                [tag.strip() for tag in page["Properties"]["Tags"].split(",")]
-            ),
+            tags=[RecipeBoxTag(tag) for tag in page["Properties"]["Tags"]],
         ),
         [RecipeDetailSection(section) for section in page["Content"]],
     )
@@ -80,3 +82,6 @@ for orgfile in Path("recipes/").glob("*.org"):
     with open(f"site/{html_fname}", "w") as outfile:
         outfile.write(soup.prettify())
         print(f"Successfully converted {orgfile} to {html_fname}")
+with open("site/recipes/index.json", "w") as outfile:
+    outfile.write(json.dumps(properties, indent=4))
+    print(f"Successfully generated index.json from recipes")

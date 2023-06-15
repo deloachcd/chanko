@@ -5,6 +5,12 @@ from pathlib import Path
 import html
 
 
+class TemplateHelpers:
+    @staticmethod
+    def render_all(collection):
+        return "".join([item.render() for item in collection])
+
+
 class FileTemplateHTML:
     def render(self):
         # evil f-string hacking with eval() to populate f-string
@@ -13,16 +19,9 @@ class FileTemplateHTML:
 
 
 @dataclass
-class RecipeBoxTags(FileTemplateHTML):
-    taglist: list
-    html_template: str = Path("templates/RecipeBoxTags.html").read_text()
-
-    def render(self):
-        self._tags_html = ""
-        for tag in self.taglist:
-            tag_html = f'<span class="tag">{tag}</span>'
-            self._tags_html += tag_html
-        return super().render()
+class RecipeBoxTag(FileTemplateHTML):
+    tagname: str
+    html_template: str = Path("templates/RecipeBoxTag.html").read_text()
 
 
 @dataclass
@@ -31,7 +30,7 @@ class RecipeBox(FileTemplateHTML):
     recipe_name: str
     prep_time: str
     cook_time: str
-    tags: RecipeBoxTags
+    tags: list
     html_template: str = Path("templates/RecipeBox.html").read_text()
 
 
@@ -41,7 +40,7 @@ class RecipeBoxSmall(FileTemplateHTML):
     recipe_name: str
     prep_time: str
     cook_time: str
-    tags: RecipeBoxTags
+    tags: list
     html_template: str = Path("templates/RecipeBox.html").read_text()
 
 
@@ -86,12 +85,6 @@ class RecipeInstructionsPage(FileTemplateHTML):
     recipe_box: RecipeBox
     detail_sections: list
     html_template: str = Path("templates/RecipeInstructionsPage.html").read_text()
-
-
-class TemplateHelpers:
-    @staticmethod
-    def render_all(collection):
-        return "".join([item.render() for item in collection])
 
 
 if __name__ == "__main__":
