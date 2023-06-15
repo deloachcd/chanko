@@ -1,0 +1,22 @@
+<div class="column is-one-third recipebox"
+     data-tags="{str([tag.tagname for tag in self.tags]).replace(',','')}">
+  <a href="recipes/buffalo-wings.html">
+    <div class="box">
+      <figure class="image is-16by9">
+        <img class="is-rounded-cornered is-fitted" src="{self.img_path}">
+      </figure>
+      <br>
+      <h1 class="title is-4 is-bold">
+        {self.recipe_name}
+      </h1>
+      <h2 class="subtitle is-6">
+        <b>Prep:</b>&nbsp;{self.prep_time}<br>
+        <b>Cook:</b>&nbsp;{self.cook_time}<br>
+        <b>Tags:</b>
+        <div class="tags are-medium pt-1">
+          {TemplateHelpers.render_all(self.tags)}
+        </div>
+      </h2>
+    </div>
+  </a>
+</div>

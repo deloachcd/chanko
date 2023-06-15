@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chanko v0.1</title>
+    <link rel="icon" type="image/x-icon" href="icons/kitchen-set-solid.svg">
+    <link rel="stylesheet" href="res/css/bulma.min.css">
+    <link rel="stylesheet" href="res/css/custom.css">
+  </head>
+  <script src="res/script/search.js"></script>
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-transparent is-fixed-top has-border-shadow">
+      <div class="navbar-item">
+        <div class="field has-addons">
+          <div class="control has-icons-right">
+            <input class="input" type="text" id="search" placeholder="Search by name, or tags">
+            <button class="icon is-right" id="clear-search">
+              <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Backspace</title><path d="M135.19 390.14a28.79 28.79 0 0021.68 9.86h246.26A29 29 0 00432 371.13V140.87A29 29 0 00403.13 112H156.87a28.84 28.84 0 00-21.67 9.84v0L46.33 256l88.86 134.11z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M336.67 192.33L206.66 322.34M336.67 322.34L206.66 192.33M336.67 192.33L206.66 322.34M336.67 322.34L206.66 192.33"></path></svg>
+            </button>
+          </div>
+          <div class="control">
+            <a class="button is-dark">
+              <b>Random Recipe</b>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="section pb-0" id="no-js-warning">
+      <div class="notification is-danger">
+        <p class="is-bold">
+          Searching and tags won't work correctly without JavaScript enabled!
+        </p>  
+      </div>
+    </section>
+    <section class="section" id="recipesection">
+      <div class="columns">
+        <div class="column is-one-third recipebox"
+             data-tags="['american' 'comfort_food']">
+          <a href="recipes/buffalo-wings.html">
+            <div class="box">
+              <figure class="image is-16by9">
+                <img class="is-rounded-cornered is-fitted" src="res/img/buffalo-wings.jpg">
+              </figure>
+              <br>
+              <h1 class="title is-4 is-bold">
+                RedHot Buffalo Wings
+              </h1>
+              <h2 class="subtitle is-6">
+                <b>Prep:</b>&nbsp;30 minutes<br>
+                <b>Cook:</b>&nbsp;35 minutes<br>
+                <b>Tags:</b>
+                <div class="tags are-medium pt-1">
+                  <span class="tag">american</span>
+                  <span class="tag">comfort_food</span>
+                </div>
+              </h2>
+            </div>
+          </a>
+        </div>
+        <div class="column is-one-third recipebox"
+             data-tags="[food]">
+          <div class="box">
+            <figure class="image is-16by9">
+              <img class="is-rounded-cornered is-fitted" src="res/img/chankonabe.jpg">
+            </figure>
+            <br>
+            <h1 class="subtitle is-bold">
+              Chankonabe ("Sumo Stew")
+            </h1>
+          </div>
+        </div>
+        <div class="column is-one-third recipebox"
+             data-tags="[food]">
+          <div class="box">
+            <figure class="image is-16by9">
+              <img class="is-rounded-cornered is-fitted" src="res/img/dolmas.jpg">
+            </figure>
+            <br>
+            <h1 class="subtitle is-bold">
+              Dolmas (stuffed grape leaves)
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-third recipebox"
+             data-tags="[food]">
+          <div class="box">
+            <figure class="image is-16by9">
+              <img class="is-rounded-cornered is-fitted" src="res/img/poke-bowl.jpeg">
+            </figure>
+            <br>
+            <h1 class="subtitle is-bold">
+              Poke Bowl
+            </h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section pt-0" id="tagsection">
+      <h1 class="title">Tags</h1>
+      <div class="tags are-medium">
+        <button class="tag">american</button>
+        <button class="tag">japanese</button>
+        <button class="tag">greek</button>
+        <button class="tag">comfort_food</button>
+      </div>
+    </section>
+  </body>
+</html>

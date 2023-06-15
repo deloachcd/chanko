@@ -19,6 +19,12 @@ class FileTemplateHTML:
 
 
 @dataclass
+class TagFilterButton(FileTemplateHTML):
+    tagname: str
+    html_template: str = Path("templates/TagFilterButton.html").read_text()
+
+
+@dataclass
 class RecipeBoxTag(FileTemplateHTML):
     tagname: str
     html_template: str = Path("templates/RecipeBoxTag.html").read_text()
@@ -35,13 +41,19 @@ class RecipeBox(FileTemplateHTML):
 
 
 @dataclass
-class RecipeBoxSmall(FileTemplateHTML):
+class RecipeBoxLink(FileTemplateHTML):
     img_path: str
     recipe_name: str
     prep_time: str
     cook_time: str
     tags: list
-    html_template: str = Path("templates/RecipeBox.html").read_text()
+    html_template: str = Path("templates/RecipeBoxLink.html").read_text()
+
+
+@dataclass
+class RecipeBoxColumnsDiv(FileTemplateHTML):
+    recipebox_divs: list
+    html_template: str = Path("templates/RecipeBoxColumnsDiv.html").read_text()
 
 
 @dataclass
@@ -85,6 +97,13 @@ class RecipeInstructionsPage(FileTemplateHTML):
     recipe_box: RecipeBox
     detail_sections: list
     html_template: str = Path("templates/RecipeInstructionsPage.html").read_text()
+
+
+@dataclass
+class Index(FileTemplateHTML):
+    recipebox_column_divs: list
+    tag_filter_buttons: list
+    html_template: str = Path("templates/Index.html").read_text()
 
 
 if __name__ == "__main__":
