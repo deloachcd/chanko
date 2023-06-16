@@ -5,16 +5,7 @@ import json
 import bs4
 import orgparse
 
-from Templates import (
-    RecipeBox,
-    RecipeBoxLink,
-    RecipeBoxColumnsDiv,
-    RecipeBoxTag,
-    TagFilterButton,
-    RecipeInstructionsPage,
-    RecipeDetailSection,
-    Index,
-)
+import Templates
 
 
 def parse_orgnode(node):
@@ -74,16 +65,18 @@ for orgfile in Path("recipes/").glob("*.org"):
         {key: value for key, value in page.items() if key not in ["Content"]}
     )
 
-    detail_sections = [RecipeDetailSection(section) for section in page["Content"]]
-    page_html = RecipeInstructionsPage(
-        RecipeBox(
+    detail_sections = [
+        Templates.RecipeDetailSection(section) for section in page["Content"]
+    ]
+    page_html = Templates.RecipeInstructionsPage(
+        Templates.RecipeBox(
             img_path=page["ImagePath"],
             recipe_name=page["RecipeName"],
             prep_time=page["Properties"]["PrepTime"],
             cook_time=page["Properties"]["CookTime"],
-            tags=[RecipeBoxTag(tag) for tag in page["Properties"]["Tags"]],
+            tags=[Templates.RecipeBoxTag(tag) for tag in page["Properties"]["Tags"]],
         ),
-        [RecipeDetailSection(section) for section in page["Content"]],
+        [Templates.RecipeDetailSection(section) for section in page["Content"]],
     )
     soup = bs4.BeautifulSoup(page_html.render(), "html.parser")
     with open(f"site/{page['FileName']}", "w") as outfile:
@@ -94,12 +87,12 @@ for orgfile in Path("recipes/").glob("*.org"):
 recipe_boxes = []
 for recipe in index["Recipes"]:
     recipe_boxes.append(
-        RecipeBoxLink(
+        Templates.RecipeBoxLink(
             recipe_name=recipe["RecipeName"],
             img_path=recipe["ImagePath"],
             prep_time=recipe["Properties"]["PrepTime"],
             cook_time=recipe["Properties"]["CookTime"],
-            tags=[RecipeBoxTag(tag) for tag in recipe["Properties"]["Tags"]],
+            tags=[Templates.RecipeBoxTag(tag) for tag in recipe["Properties"]["Tags"]],
         )
     )
 # build columns divs from list of recipe box objects
@@ -111,15 +104,16 @@ for i in range(0, len(recipe_boxes), 3):
         recipebox_links.append(recipe_boxes[i + 1])
     if i + 2 < len(recipe_boxes):
         recipebox_links.append(recipe_boxes[i + 2])
-    columns_divs.append(RecipeBoxColumnsDiv(recipebox_divs=recipebox_links))
+    columns_divs.append(Templates.RecipeBoxColumnsDiv(recipebox_divs=recipebox_links))
 # build clickable buttons from list of tags
 tag_buttons = []
 for tag in index["Tags"]:
-    tag_buttons.append(TagFilterButton(tag))
+    tag_buttons.append(Templates.TagFilterButton(tag))
 # finally, build index
-index = Index(recipebox_column_divs=columns_divs, tag_filter_buttons=tag_buttons)
+index = Templates.Index(
+    recipebox_column_divs=columns_divs, tag_filter_buttons=tag_buttons
+)
 soup = bs4.BeautifulSoup(index.render(), "html.parser")
-print(soup.prettify())
 with open("site/index.html", "w") as outfile:
     outfile.write(soup.prettify())
     print(f"Successfully generated index.html from recipes")
